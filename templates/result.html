@@ -16,11 +16,15 @@
                 <span class="logo-icon"></span>
                 <span class="logo-text">PlantCare <span class="logo-highlight">AI</span></span>
             </a>
-            <ul class="nav-links">
+            <ul class="nav-links" id="navLinks">
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About</a></li>
             </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
+        <div class="nav-overlay" id="navOverlay"></div>
     </nav>
 
     <!-- Result Section -->
@@ -136,6 +140,27 @@
     </footer>
 
     <script>
+        // Mobile menu toggle
+        (function() {
+            var toggle = document.getElementById('navToggle');
+            var links = document.getElementById('navLinks');
+            var overlay = document.getElementById('navOverlay');
+            function close() {
+                toggle.classList.remove('active');
+                links.classList.remove('open');
+                overlay.classList.remove('visible');
+                document.body.style.overflow = '';
+            }
+            toggle.addEventListener('click', function() {
+                var open = links.classList.toggle('open');
+                toggle.classList.toggle('active');
+                overlay.classList.toggle('visible');
+                document.body.style.overflow = open ? 'hidden' : '';
+            });
+            overlay.addEventListener('click', close);
+            links.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', close); });
+        })();
+
         (function() {
             var body = document.body;
             var confidence = body.getAttribute('data-confidence');
