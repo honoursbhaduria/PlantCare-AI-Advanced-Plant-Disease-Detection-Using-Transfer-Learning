@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+.env/
+
+# Uploads (user images - don't commit these)
+static/uploads/*
+!static/uploads/.gitkeep
+
+# Model files (too large for Git - use Git LFS or download at build)
+# model/*.h5
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Vercel (not needed for Render)
+# vercel.json
