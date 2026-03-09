@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result — PlantCare AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body data-confidence="{{ confidence }}" data-color="{{ disease_info.color }}">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <span class="logo-icon">🌿</span>
+                <span class="logo-text">PlantCare <span class="logo-highlight">AI</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Result Section -->
+    <section class="result-section">
+        <div class="container">
+            <h2 class="section-title">Diagnosis Results</h2>
+            <p class="section-subtitle">AI-powered analysis of your rice leaf image</p>
+
+            <div class="result-grid">
+                <!-- Uploaded Image -->
+                <div class="result-image-card">
+                    <h3>Uploaded Image</h3>
+                    <div class="result-image-wrapper">
+                        <img src="{{ image_path }}" alt="Uploaded Rice Leaf" class="result-image">
+                    </div>
+                </div>
+
+                <!-- Prediction Result -->
+                <div class="result-prediction-card">
+                    <div class="prediction-header">
+                        <div class="prediction-icon">
+                            {% if disease_info.severity == 'High' %}
+                                🔴
+                            {% elif disease_info.severity == 'Medium' %}
+                                🟠
+                            {% else %}
+                                🟡
+                            {% endif %}
+                        </div>
+                        <div>
+                            <h3>Detected Disease</h3>
+                            <div class="prediction-name">{{ prediction }}</div>
+                        </div>
+                    </div>
+
+                    <div class="confidence-section">
+                        <div class="confidence-label">
+                            <span>Confidence</span>
+                            <span class="confidence-value">{{ confidence }}%</span>
+                        </div>
+                        <div class="confidence-bar">
+                            <div class="confidence-fill confidence-fill-dynamic"></div>
+                        </div>
+                    </div>
+
+                    <div class="severity-badge severity-badge-dynamic">
+                        Severity: {{ disease_info.severity }}
+                    </div>
+
+                    <!-- All Predictions Breakdown -->
+                    <div class="predictions-breakdown">
+                        <h4>Prediction Breakdown</h4>
+                        {% for class_name, prob in all_predictions.items() %}
+                        <div class="prediction-item">
+                            <div class="prediction-item-label">
+                                <span>{{ class_name }}</span>
+                                <span>{{ prob }}%</span>
+                            </div>
+                            <div class="prediction-item-bar">
+                                <div class="prediction-item-fill {% if class_name == prediction %}active{% endif %}"
+                                     data-width="{{ prob }}"></div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disease Details -->
+            <div class="disease-details">
+                <h3>📋 Disease Details & Recommendations</h3>
+
+                <div class="details-grid">
+                    <div class="detail-card">
+                        <div class="detail-icon">🦠</div>
+                        <h4>Cause</h4>
+                        <p>{{ disease_info.cause }}</p>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-icon">🔎</div>
+                        <h4>Symptoms</h4>
+                        <p>{{ disease_info.symptoms }}</p>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-icon">💊</div>
+                        <h4>Treatment</h4>
+                        <p>{{ disease_info.treatment }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="result-actions">
+                <a href="/" class="action-btn primary">
+                    <span>📤</span> Analyze Another Image
+                </a>
+                <button class="action-btn secondary" onclick="window.print()">
+                    <span>🖨️</span> Print Report
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>PlantCare AI — Group Capstone Project — Made with dedication towards sustainable agriculture</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var body = document.body;
+            var confidence = body.getAttribute('data-confidence');
+            var color = body.getAttribute('data-color');
+
+            var fill = document.querySelector('.confidence-fill-dynamic');
+            if (fill) {
+                fill.style.width = confidence + '%';
+                fill.style.backgroundColor = color;
+            }
+
+            var badge = document.querySelector('.severity-badge-dynamic');
+            if (badge) {
+                badge.style.backgroundColor = color + '20';
+                badge.style.color = color;
+                badge.style.border = '1px solid ' + color + '40';
+            }
+
+            document.querySelectorAll('.prediction-item-fill[data-width]').forEach(function(el) {
+                el.style.width = el.getAttribute('data-width') + '%';
+            });
+        })();
+    </script>
+</body>
+</html>

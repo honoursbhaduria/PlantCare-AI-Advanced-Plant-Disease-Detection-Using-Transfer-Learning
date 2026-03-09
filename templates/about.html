@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — PlantCare AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <span class="logo-icon">🌿</span>
+                <span class="logo-text">PlantCare <span class="logo-highlight">AI</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about" class="active">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-title">About the Project</h2>
+            <p class="section-subtitle">A Group Capstone Project on Advanced Plant Disease Detection</p>
+
+            <div class="about-content">
+                <div class="about-block">
+                    <h3>🎯 Project Overview</h3>
+                    <p>
+                        PlantCare AI is a deep learning-based system that classifies rice leaf diseases
+                        using transfer learning with the Xception architecture. The model achieves
+                        <strong>96.67% validation accuracy</strong> in detecting three major rice diseases:
+                        Bacterial Leaf Blight, Brown Spot, and Leaf Smut.
+                    </p>
+                    <p>
+                        Rice is one of the most important staple crops in the world, providing sustenance to
+                        over half of the world's population. This project aims to help farmers quickly
+                        identify diseases and take corrective action, contributing to sustainable agriculture.
+                    </p>
+                </div>
+
+                <div class="about-block">
+                    <h3>🧠 Technical Approach</h3>
+                    <ul class="about-list">
+                        <li><strong>Dataset:</strong> 119 images across 3 classes from Kaggle (Rice Leaf Diseases)</li>
+                        <li><strong>Preprocessing:</strong> Resized to 224×224, normalized to [0,1], one-hot encoded labels</li>
+                        <li><strong>Data Augmentation:</strong> Rotation (40°), width/height shift (0.3), horizontal & vertical flips</li>
+                        <li><strong>Models Trained:</strong> Custom CNN, InceptionV3, Xception (with and without augmentation)</li>
+                        <li><strong>Hyperparameter Tuning:</strong> Keras Tuner RandomSearch for CNN optimization</li>
+                        <li><strong>Best Model:</strong> Xception with data augmentation — 96.67% validation accuracy</li>
+                        <li><strong>Web Application:</strong> Flask-based interface for real-time disease prediction</li>
+                    </ul>
+                </div>
+
+                <div class="about-block">
+                    <h3>👥 Team Members</h3>
+                    <div class="team-grid">
+                        <div class="team-card">
+                            <div class="team-avatar">HT</div>
+                            <div class="team-info">
+                                <h4>Harshit Tyagi</h4>
+                                <span class="team-role lead">Team Lead</span>
+                            </div>
+                        </div>
+                        <div class="team-card">
+                            <div class="team-avatar">HJ</div>
+                            <div class="team-info">
+                                <h4>Himanshu Jaiswal</h4>
+                                <span class="team-role">Member</span>
+                            </div>
+                        </div>
+                        <div class="team-card">
+                            <div class="team-avatar">HM</div>
+                            <div class="team-info">
+                                <h4>Himanshu Mishra</h4>
+                                <span class="team-role">Member</span>
+                            </div>
+                        </div>
+                        <div class="team-card">
+                            <div class="team-avatar">HB</div>
+                            <div class="team-info">
+                                <h4>Honours Bhadauria</h4>
+                                <span class="team-role">Member</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-block">
+                    <h3>🔗 Project Links</h3>
+                    <div class="links-grid">
+                        <a href="https://github.com/honoursbhaduria/PlantCare-AI-Advanced-Plant-Disease-Detection-Using-Transfer-Learning" target="_blank" class="project-link">
+                            <span>📁</span> GitHub Repository
+                        </a>
+                        <a href="https://gist.github.com/honoursbhaduria/e1e3e5e344e56e6e43f3872863913646" target="_blank" class="project-link">
+                            <span>📓</span> Notebook Gist
+                        </a>
+                        <a href="https://colab.research.google.com/#fileId=https%3A//storage.googleapis.com/kaggle-colab-exported-notebooks/honoursbhadauria/riceleafdisease-cnn-accuracy-86-67.2fc7a359-8315-4138-b6f6-3eda0f98d091.ipynb%3FX-Goog-Algorithm%3DGOOG4-RSA-SHA256%26X-Goog-Credential%3Dgcp-kaggle-com%2540kaggle-161607.iam.gserviceaccount.com/20260309/auto/storage/goog4_request%26X-Goog-Date%3D20260309T114425Z%26X-Goog-Expires%3D259200%26X-Goog-SignedHeaders%3Dhost%26X-Goog-Signature%3Dabb3ac4d60464dfe753a1fbd43858a35f44f78c598f379efdf3cd81f0872379cd9a9585832dee4e405d9301d87eb48a2f54ce1672c90612e7b2c19f602779fde6554c5d5e8f4ba33cba3d760b229cd7dcb6b9190d56d612cc119bfb7647a556bc5126be9b113afaa199117af9c6a5aba876acccabdd4b22b1c3dfdfa28fff0a8067a6dd8c1ba64d6510c241e9ab9b43880f363c632166a9c86d4eebfa0407b5b81f456c95e761a5b5cf966e945a581647a44ce48ffd0e0de3d67e67ab0f1c477e05bf03fd6cb7d5d11a91ed5c245ca93ecf34ff46bf539b49817d4345a3d35f13ead78892197ad3dc910c7425a91669d2e45a1f679346de546a7ad54a9f6462c" target="_blank" class="project-link">
+                            <span>🔬</span> Open in Colab
+                        </a>
+                        <a href="https://www.kaggle.com/datasets/vbookshelf/rice-leaf-diseases" target="_blank" class="project-link">
+                            <span>📊</span> Kaggle Dataset
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>PlantCare AI — Group Capstone Project — Made with dedication towards sustainable agriculture</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
