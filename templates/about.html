@@ -13,7 +13,7 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="/" class="nav-logo">
-                <span class="logo-icon">🌿</span>
+                <span class="logo-icon"></span>
                 <span class="logo-text">PlantCare <span class="logo-highlight">AI</span></span>
             </a>
             <ul class="nav-links">
@@ -55,7 +55,7 @@
 
             <div class="about-content">
                 <div class="about-block">
-                    <h3>🎯 Project Overview</h3>
+                    <h3>Project Overview</h3>
                     <p>
                         PlantCare AI is a deep learning-based system that classifies rice leaf diseases
                         using transfer learning with the Xception architecture. The model achieves
@@ -70,11 +70,11 @@
                 </div>
 
                 <div class="about-block">
-                    <h3>🧠 Technical Approach</h3>
+                    <h3>Technical Approach</h3>
                     <ul class="about-list">
                         <li><strong>Dataset:</strong> 119 images across 3 classes from Kaggle (Rice Leaf Diseases)</li>
-                        <li><strong>Preprocessing:</strong> Resized to 224×224, normalized to [0,1], one-hot encoded labels</li>
-                        <li><strong>Data Augmentation:</strong> Rotation (40°), width/height shift (0.3), horizontal & vertical flips</li>
+                        <li><strong>Preprocessing:</strong> Resized to 224x224, normalized to [0,1], one-hot encoded labels</li>
+                        <li><strong>Data Augmentation:</strong> Rotation (40 deg), width/height shift (0.3), horizontal and vertical flips</li>
                         <li><strong>Models Trained:</strong> Custom CNN, InceptionV3, Xception (with and without augmentation)</li>
                         <li><strong>Hyperparameter Tuning:</strong> Keras Tuner RandomSearch for CNN optimization</li>
                         <li><strong>Best Model:</strong> Xception with data augmentation — 96.67% validation accuracy</li>
@@ -83,13 +83,20 @@
                 </div>
 
                 <div class="about-block">
-                    <h3>👥 Team Members</h3>
+                    <h3>Team Members</h3>
                     <div class="team-grid">
+                        <div class="team-card">
+                            <div class="team-avatar">HB</div>
+                            <div class="team-info">
+                                <h4><a href="https://github.com/honoursbhaduria" target="_blank" style="color: inherit; text-decoration: none;">Honours Bhadauria</a></h4>
+                                <span class="team-role lead">Team Lead</span>
+                            </div>
+                        </div>
                         <div class="team-card">
                             <div class="team-avatar">HT</div>
                             <div class="team-info">
                                 <h4>Harshit Tyagi</h4>
-                                <span class="team-role lead">Team Lead</span>
+                                <span class="team-role">Member</span>
                             </div>
                         </div>
                         <div class="team-card">
@@ -106,30 +113,47 @@
                                 <span class="team-role">Member</span>
                             </div>
                         </div>
-                        <div class="team-card">
-                            <div class="team-avatar">HB</div>
-                            <div class="team-info">
-                                <h4>Honours Bhadauria</h4>
-                                <span class="team-role">Member</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
                 <div class="about-block">
-                    <h3>🔗 Project Links</h3>
+                    <h3>Project Links</h3>
                     <div class="links-grid">
                         <a href="https://github.com/honoursbhaduria/PlantCare-AI-Advanced-Plant-Disease-Detection-Using-Transfer-Learning" target="_blank" class="project-link">
-                            <span>📁</span> GitHub Repository
+                            <span class="link-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            </span>
+                            GitHub Repository
                         </a>
                         <a href="https://gist.github.com/honoursbhaduria/e1e3e5e344e56e6e43f3872863913646" target="_blank" class="project-link">
-                            <span>📓</span> Notebook Gist
+                            <span class="link-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                            </span>
+                            Notebook Gist
                         </a>
                         <a href="https://colab.research.google.com/#fileId=https%3A//storage.googleapis.com/kaggle-colab-exported-notebooks/honoursbhadauria/riceleafdisease-cnn-accuracy-86-67.2fc7a359-8315-4138-b6f6-3eda0f98d091.ipynb%3FX-Goog-Algorithm%3DGOOG4-RSA-SHA256%26X-Goog-Credential%3Dgcp-kaggle-com%2540kaggle-161607.iam.gserviceaccount.com/20260309/auto/storage/goog4_request%26X-Goog-Date%3D20260309T114425Z%26X-Goog-Expires%3D259200%26X-Goog-SignedHeaders%3Dhost%26X-Goog-Signature%3Dabb3ac4d60464dfe753a1fbd43858a35f44f78c598f379efdf3cd81f0872379cd9a9585832dee4e405d9301d87eb48a2f54ce1672c90612e7b2c19f602779fde6554c5d5e8f4ba33cba3d760b229cd7dcb6b9190d56d612cc119bfb7647a556bc5126be9b113afaa199117af9c6a5aba876acccabdd4b22b1c3dfdfa28fff0a8067a6dd8c1ba64d6510c241e9ab9b43880f363c632166a9c86d4eebfa0407b5b81f456c95e761a5b5cf966e945a581647a44ce48ffd0e0de3d67e67ab0f1c477e05bf03fd6cb7d5d11a91ed5c245ca93ecf34ff46bf539b49817d4345a3d35f13ead78892197ad3dc910c7425a91669d2e45a1f679346de546a7ad54a9f6462c" target="_blank" class="project-link">
-                            <span>🔬</span> Open in Colab
+                            <span class="link-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                            </span>
+                            Open in Colab
                         </a>
                         <a href="https://www.kaggle.com/datasets/vbookshelf/rice-leaf-diseases" target="_blank" class="project-link">
-                            <span>📊</span> Kaggle Dataset
+                            <span class="link-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                            </span>
+                            Kaggle Dataset
+                        </a>
+                        <a href="https://github.com/honoursbhaduria" target="_blank" class="project-link">
+                            <span class="link-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            </span>
+                            GitHub Profile
+                        </a>
+                        <a href="https://github.com/honoursbhaduria/PlantCare-AI-Advanced-Plant-Disease-Detection-Using-Transfer-Learning" target="_blank" class="project-link">
+                            <span class="link-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            </span>
+                            Star the Repo
                         </a>
                     </div>
                 </div>
