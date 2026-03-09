@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body data-confidence="{{ confidence }}" data-color="{{ disease_info.color }}">
-    <!-- Navigation -->
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="/" class="nav-logo">
@@ -27,120 +27,130 @@
         <div class="nav-overlay" id="navOverlay"></div>
     </nav>
 
-    <!-- Result Section -->
+    <!-- Result -->
     <section class="result-section">
-        <div class="container">
-            <h2 class="section-title">Diagnosis Results</h2>
-            <p class="section-subtitle">AI-powered analysis of your rice leaf image</p>
+        <div class="result-header">
+            <h2>Diagnosis Results</h2>
+            <p>AI-powered analysis of your rice leaf image</p>
+        </div>
 
-            <div class="result-grid">
-                <!-- Uploaded Image -->
-                <div class="result-image-card">
-                    <h3>Uploaded Image</h3>
-                    <div class="result-image-wrapper">
-                        <img src="{{ image_path }}" alt="Uploaded Rice Leaf" class="result-image">
-                    </div>
-                </div>
-
-                <!-- Prediction Result -->
-                <div class="result-prediction-card">
-                    <div class="prediction-header">
-                        <div class="prediction-icon severity-{% if disease_info.severity == 'High' %}high{% elif disease_info.severity == 'Medium' %}medium{% else %}low{% endif %}">
-                            <span class="dot"></span>
-                        </div>
-                        <div>
-                            <h3>Detected Disease</h3>
-                            <div class="prediction-name">{{ prediction }}</div>
-                        </div>
-                    </div>
-
-                    <div class="confidence-section">
-                        <div class="confidence-label">
-                            <span>Confidence</span>
-                            <span class="confidence-value">{{ confidence }}%</span>
-                        </div>
-                        <div class="confidence-bar">
-                            <div class="confidence-fill confidence-fill-dynamic"></div>
-                        </div>
-                    </div>
-
-                    <div class="severity-badge severity-badge-dynamic">
-                        Severity: {{ disease_info.severity }}
-                    </div>
-
-                    <!-- All Predictions Breakdown -->
-                    <div class="predictions-breakdown">
-                        <h4>Prediction Breakdown</h4>
-                        {% for class_name, prob in all_predictions.items() %}
-                        <div class="prediction-item">
-                            <div class="prediction-item-label">
-                                <span>{{ class_name }}</span>
-                                <span>{{ prob }}%</span>
-                            </div>
-                            <div class="prediction-item-bar">
-                                <div class="prediction-item-fill {% if class_name == prediction %}active{% endif %}"
-                                     data-width="{{ prob }}"></div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
+        <div class="result-bento">
+            <!-- Image Card (dark) -->
+            <div class="result-image-card">
+                <h3>Uploaded Image</h3>
+                <div class="result-image-wrapper">
+                    <img src="{{ image_path }}" alt="Uploaded Rice Leaf" class="result-image">
                 </div>
             </div>
 
-            <!-- Disease Details -->
-            <div class="disease-details">
-                <h3>Disease Details and Recommendations</h3>
-
-                <div class="details-grid">
-                    <div class="detail-card">
-                        <div class="detail-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-                        </div>
-                        <h4>Cause</h4>
-                        <p>{{ disease_info.cause }}</p>
+            <!-- Prediction Card (white) -->
+            <div class="result-prediction-card">
+                <div class="prediction-header">
+                    <div class="prediction-icon severity-{% if disease_info.severity == 'High' %}high{% elif disease_info.severity == 'Medium' %}medium{% else %}low{% endif %}">
+                        <span class="dot"></span>
                     </div>
-                    <div class="detail-card">
-                        <div class="detail-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                        </div>
-                        <h4>Symptoms</h4>
-                        <p>{{ disease_info.symptoms }}</p>
-                    </div>
-                    <div class="detail-card">
-                        <div class="detail-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                        </div>
-                        <h4>Treatment</h4>
-                        <p>{{ disease_info.treatment }}</p>
+                    <div>
+                        <h3>Detected Disease</h3>
+                        <div class="prediction-name">{{ prediction }}</div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Actions -->
-            <div class="result-actions">
-                <a href="/" class="action-btn primary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                    Analyze Another Image
-                </a>
-                <button class="action-btn secondary" onclick="window.print()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-                    Print Report
-                </button>
+                <div class="confidence-section">
+                    <div class="confidence-label">
+                        <span>Confidence</span>
+                        <span class="confidence-value">{{ confidence }}%</span>
+                    </div>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill confidence-fill-dynamic"></div>
+                    </div>
+                </div>
+
+                <div class="severity-badge severity-badge-dynamic">
+                    Severity: {{ disease_info.severity }}
+                </div>
+
+                <div class="predictions-breakdown">
+                    <h4>Prediction Breakdown</h4>
+                    {% for class_name, prob in all_predictions.items() %}
+                    <div class="prediction-item">
+                        <div class="prediction-item-label">
+                            <span>{{ class_name }}</span>
+                            <span>{{ prob }}%</span>
+                        </div>
+                        <div class="prediction-item-bar">
+                            <div class="prediction-item-fill {% if class_name == prediction %}active{% endif %}"
+                                 data-width="{{ prob }}"></div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
+        </div>
+
+        <!-- Disease Details (bento: dark, green, purple) -->
+        <div class="disease-details">
+            <div class="detail-bento">
+                <div class="detail-top">
+                    <div class="detail-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+                    </div>
+                    <span class="arrow-icon" style="color: currentColor;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                    </span>
+                </div>
+                <h4>Cause</h4>
+                <p>{{ disease_info.cause }}</p>
+            </div>
+            <div class="detail-bento">
+                <div class="detail-top">
+                    <div class="detail-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    </div>
+                    <span class="arrow-icon" style="color: currentColor;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                    </span>
+                </div>
+                <h4>Symptoms</h4>
+                <p>{{ disease_info.symptoms }}</p>
+            </div>
+            <div class="detail-bento">
+                <div class="detail-top">
+                    <div class="detail-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    </div>
+                    <span class="arrow-icon" style="color: currentColor;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                    </span>
+                </div>
+                <h4>Treatment</h4>
+                <p>{{ disease_info.treatment }}</p>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="result-actions">
+            <a href="/" class="action-btn primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                Analyze Another Image
+            </a>
+            <button class="action-btn secondary" onclick="window.print()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                Print Report
+            </button>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-bottom">
+        <div class="footer-bento" style="padding: 20px 28px;">
+            <div class="footer-bottom" style="border-top: none; padding-top: 0;">
                 <p>PlantCare AI — Group Capstone Project — Made with dedication towards sustainable agriculture</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle
+        // Mobile menu
         (function() {
             var toggle = document.getElementById('navToggle');
             var links = document.getElementById('navLinks');
@@ -161,6 +171,7 @@
             links.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', close); });
         })();
 
+        // Animate bars
         (function() {
             var body = document.body;
             var confidence = body.getAttribute('data-confidence');
@@ -168,7 +179,6 @@
 
             var fill = document.querySelector('.confidence-fill-dynamic');
             if (fill) {
-                // Trigger animation after paint
                 requestAnimationFrame(function() {
                     requestAnimationFrame(function() {
                         fill.style.width = confidence + '%';
@@ -184,7 +194,6 @@
                 badge.style.border = '1px solid ' + color + '30';
             }
 
-            // Animate prediction bars with stagger
             document.querySelectorAll('.prediction-item-fill[data-width]').forEach(function(el, i) {
                 setTimeout(function() {
                     el.style.width = el.getAttribute('data-width') + '%';
