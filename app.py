@@ -125,6 +125,8 @@ def about():
     return render_template('about.html')
 
 
+# Load model at module level for production (Render/Vercel)
+load_trained_model()
+
 if __name__ == '__main__':
-    load_trained_model()
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
