@@ -249,24 +249,33 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-bento">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <span class="logo-text">PlantCare <span class="logo-highlight">AI</span></span>
-                    <p>Advanced Plant Disease Detection Using Transfer Learning</p>
+            <div class="footer-main">
+                <!-- Left side: Content -->
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <span class="logo-text">PlantCare <span class="logo-highlight">AI</span></span>
+                        <p>Advanced Plant Disease Detection Using Transfer Learning</p>
+                    </div>
+                    <div class="footer-cols">
+                        <div class="footer-col">
+                            <h4>Project</h4>
+                            <a href="https://github.com/honoursbhaduria/PlantCare-AI-Advanced-Plant-Disease-Detection-Using-Transfer-Learning" target="_blank">GitHub Repository</a>
+                            <a href="https://gist.github.com/honoursbhaduria/e1e3e5e344e56e6e43f3872863913646" target="_blank">Notebook Gist</a>
+                            <a href="https://www.kaggle.com/datasets/vbookshelf/rice-leaf-diseases" target="_blank">Dataset</a>
+                            <a href="https://github.com/honoursbhaduria/PlantCare-AI-Advanced-Plant-Disease-Detection-Using-Transfer-Learning" target="_blank">Star the Repo</a>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Team</h4>
+                            <a href="https://github.com/honoursbhaduria" target="_blank">Honours Bhadauria</a>
+                            <p>Harshit Tyagi</p>
+                            <p>Himanshu Jaiswal</p>
+                            <p>Himanshu Mishra</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="footer-col">
-                    <h4>Project</h4>
-                    <a href="https://github.com/honoursbhaduria/PlantCare-AI-Advanced-Plant-Disease-Detection-Using-Transfer-Learning" target="_blank">GitHub Repository</a>
-                    <a href="https://gist.github.com/honoursbhaduria/e1e3e5e344e56e6e43f3872863913646" target="_blank">Notebook Gist</a>
-                    <a href="https://www.kaggle.com/datasets/vbookshelf/rice-leaf-diseases" target="_blank">Dataset</a>
-                    <a href="https://github.com/honoursbhaduria/PlantCare-AI-Advanced-Plant-Disease-Detection-Using-Transfer-Learning" target="_blank">Star the Repo</a>
-                </div>
-                <div class="footer-col">
-                    <h4>Team</h4>
-                    <a href="https://github.com/honoursbhaduria" target="_blank">Honours Bhadauria</a>
-                    <p>Harshit Tyagi</p>
-                    <p>Himanshu Jaiswal</p>
-                    <p>Himanshu Mishra</p>
+                <!-- Right side: Interactive Grid -->
+                <div class="footer-hover-grid" id="footerGrid">
+                    <!-- 7x7 grid = 49 cells, some get images -->
                 </div>
             </div>
             <div class="footer-bottom">
@@ -341,6 +350,107 @@
                 if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
+
+        // Footer interactive grid
+        (function() {
+            const grid = document.getElementById('footerGrid');
+            if (!grid) return;
+
+            const COLS = 7, ROWS = 7;
+            const TOTAL = COLS * ROWS;
+            const images = [
+                "{{ url_for('static', filename='images/plant-1.png') }}",
+                "{{ url_for('static', filename='images/plant-2.png') }}",
+                "{{ url_for('static', filename='images/plant-3.png') }}",
+                "{{ url_for('static', filename='images/plant-4.png') }}",
+                "{{ url_for('static', filename='images/plant-5.png') }}",
+                "{{ url_for('static', filename='images/plant-6.png') }}",
+                "{{ url_for('static', filename='images/plant-7.png') }}",
+                "{{ url_for('static', filename='images/plant-8.png') }}",
+                "{{ url_for('static', filename='images/plant-9.png') }}",
+                "{{ url_for('static', filename='images/plant-10.png') }}",
+                "{{ url_for('static', filename='images/plant-11.png') }}",
+                "{{ url_for('static', filename='images/plant-12.png') }}",
+                "{{ url_for('static', filename='images/plant-13.png') }}",
+                "{{ url_for('static', filename='images/plant-14.png') }}"
+            ];
+
+            // Slide directions for variety
+            var directions = ['slide-up', 'slide-down', 'slide-left', 'slide-right'];
+
+            for (var i = 0; i < TOTAL; i++) {
+                var cell = document.createElement('div');
+                cell.className = 'grid-cell has-image';
+
+                var dir = directions[Math.floor(Math.random() * directions.length)];
+                cell.setAttribute('data-dir', dir);
+
+                var randomImg = images[Math.floor(Math.random() * images.length)];
+                var imgEl = document.createElement('img');
+                imgEl.src = randomImg;
+                imgEl.alt = 'Plant';
+                imgEl.loading = 'lazy';
+                cell.appendChild(imgEl);
+
+                grid.appendChild(cell);
+            }
+
+            // Trail effect: reveal on hover, stay visible for 600ms then fade out
+            var TRAIL_DURATION = 600;
+            var cells = grid.querySelectorAll('.grid-cell');
+            var idleTimer = null;
+            var autoPlayInterval = null;
+            var IDLE_TIMEOUT = 3000; // start auto-play after 3s of no hover
+
+            function revealCell(cell) {
+                if (cell.classList.contains('revealed')) return;
+                cell.classList.add('revealed');
+                setTimeout(function() {
+                    cell.classList.remove('revealed');
+                }, TRAIL_DURATION);
+            }
+
+            // Auto-play: pop random cells
+            function startAutoPlay() {
+                if (autoPlayInterval) return;
+                autoPlayInterval = setInterval(function() {
+                    // Reveal 2-4 random cells at once for a lively effect
+                    var count = 2 + Math.floor(Math.random() * 3);
+                    for (var j = 0; j < count; j++) {
+                        var idx = Math.floor(Math.random() * cells.length);
+                        revealCell(cells[idx]);
+                    }
+                }, 800);
+            }
+
+            function stopAutoPlay() {
+                if (autoPlayInterval) {
+                    clearInterval(autoPlayInterval);
+                    autoPlayInterval = null;
+                }
+            }
+
+            function resetIdleTimer() {
+                stopAutoPlay();
+                clearTimeout(idleTimer);
+                idleTimer = setTimeout(startAutoPlay, IDLE_TIMEOUT);
+            }
+
+            // Hover interaction
+            grid.addEventListener('mouseover', function(e) {
+                var cell = e.target.closest('.grid-cell');
+                if (!cell) return;
+                revealCell(cell);
+                resetIdleTimer();
+            });
+
+            grid.addEventListener('mouseleave', function() {
+                resetIdleTimer();
+            });
+
+            // Start idle timer on load
+            idleTimer = setTimeout(startAutoPlay, IDLE_TIMEOUT);
+        })();
     </script>
 </body>
 </html>

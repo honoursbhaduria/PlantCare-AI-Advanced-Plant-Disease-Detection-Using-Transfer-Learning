@@ -996,13 +996,27 @@ body {
     border-radius: var(--radius);
     padding: 40px 36px 28px;
     color: var(--text-on-dark);
+    overflow: hidden;
 }
 
-.footer-grid {
+.footer-main {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 1fr 340px;
     gap: 36px;
     margin-bottom: 28px;
+    align-items: start;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
 }
 
 .footer-brand {
@@ -1057,6 +1071,99 @@ body {
     text-align: center;
     font-size: 0.78rem;
     color: var(--text-on-dark-muted);
+}
+
+/* ---- Interactive Hover Grid ---- */
+.footer-hover-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    gap: 3px;
+    width: 340px;
+    height: 340px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.grid-cell {
+    background: rgba(255,255,255,0.04);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    transition: background var(--dur-fast) var(--ease),
+                box-shadow var(--dur-fast) var(--ease);
+    cursor: default;
+}
+
+.grid-cell:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.grid-cell.has-image {
+    cursor: pointer;
+}
+
+.grid-cell.has-image:hover {
+    background: rgba(134,239,172,0.15);
+    box-shadow: 0 0 12px rgba(134,239,172,0.2);
+    z-index: 10;
+}
+
+/* Image inside grid cell */
+.grid-cell img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Slide Up */
+.grid-cell[data-dir="slide-up"] img {
+    transform: translateY(100%) scale(0.8);
+    transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.35s ease;
+}
+.grid-cell[data-dir="slide-up"].revealed img {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+/* Slide Down */
+.grid-cell[data-dir="slide-down"] img {
+    transform: translateY(-100%) scale(0.8);
+    transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.35s ease;
+}
+.grid-cell[data-dir="slide-down"].revealed img {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+/* Slide Left */
+.grid-cell[data-dir="slide-left"] img {
+    transform: translateX(100%) scale(0.8);
+    transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.35s ease;
+}
+.grid-cell[data-dir="slide-left"].revealed img {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+}
+
+/* Slide Right */
+.grid-cell[data-dir="slide-right"] img {
+    transform: translateX(-100%) scale(0.8);
+    transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.35s ease;
+}
+.grid-cell[data-dir="slide-right"].revealed img {
+    transform: translateX(0) scale(1);
+    opacity: 1;
 }
 
 /* ===========================
@@ -1762,13 +1869,14 @@ body {
         padding: 28px 24px;
     }
 
-    .footer-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
+    .footer-main {
+        grid-template-columns: 1fr 280px;
+        gap: 28px;
     }
 
-    .footer-brand {
-        grid-column: 1 / -1;
+    .footer-hover-grid {
+        width: 280px;
+        height: 280px;
     }
 
     .footer-bento {
@@ -2056,13 +2164,20 @@ body {
         padding-bottom: 20px;
     }
 
-    .footer-grid {
+    .footer-main {
         grid-template-columns: 1fr;
         gap: 20px;
     }
 
-    .footer-brand {
-        grid-column: auto;
+    .footer-hover-grid {
+        width: 100%;
+        height: 200px;
+        order: -1;
+    }
+
+    .footer-cols {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
     }
 
     .footer-bento {
@@ -2536,6 +2651,16 @@ body {
     .footer-bento {
         padding: 20px 14px 14px;
         border-radius: var(--radius-sm);
+    }
+
+    .footer-hover-grid {
+        height: 160px;
+        gap: 2px;
+    }
+
+    .footer-cols {
+        grid-template-columns: 1fr;
+        gap: 16px;
     }
 
     .footer-brand .logo-text {
